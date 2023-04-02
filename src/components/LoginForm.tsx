@@ -3,7 +3,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { sleep } from "../utils/util";
 import { toastError, toastSuccess } from "../utils/util";
-import { supabase } from "../server/db/auth";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -23,27 +22,6 @@ const LoginForm = () => {
         submitRef.current.disabled = false;
       }
       return;
-    }
-
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    if (error) {
-      toastError(error.message);
-      await sleep(2000);
-      if (submitRef.current) {
-        submitRef.current.disabled = false;
-      }
-
-      return;
-    }
-
-    if (data) {
-      toastSuccess("Successfully logged in");
-      await sleep(2000);
-      window.location.href = "/dashboard";
     }
   };
 

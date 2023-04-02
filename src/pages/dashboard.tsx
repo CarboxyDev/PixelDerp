@@ -1,14 +1,8 @@
 import React from "react";
-import { supabase } from "../server/db/auth";
 
 interface DashboardProps {}
 
 export async function getServerSideProps() {
-  const { data, error } = await supabase.auth.getSession();
-  console.log(data);
-  if (data.session === null) {
-  }
-
   return {
     props: {},
   };
@@ -16,11 +10,7 @@ export async function getServerSideProps() {
 
 export default function dashboard(props: DashboardProps) {
   async function logout() {
-    const error = await supabase.auth.signOut();
-    if (error) {
-      console.log(error);
-    }
-    window.location.href = "/login";
+    //
   }
 
   return (
