@@ -2,6 +2,7 @@
 /** @type {import('tailwindcss').Config} */
 const defaultTheme = require("tailwindcss/defaultTheme");
 
+
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -35,8 +36,8 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["Inter var", ...defaultTheme.fontFamily.sans],
-        inter: ["Inter var", ...defaultTheme.fontFamily.sans],
+        sans: ["inter var", ...defaultTheme.fontFamily.sans],
+        inter: ["inter var", ...defaultTheme.fontFamily.sans],
       },
       spacing: {
         15: "60px",

@@ -3,6 +3,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { sleep } from "../utils/util";
 import { toastError, toastSuccess } from "../utils/util";
+import { supabase } from "../server/db/auth";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -14,6 +15,36 @@ const LoginForm = () => {
     if (submitRef.current) {
       submitRef.current.disabled = true;
     }
+
+    if (!email || !password) {
+      toastError("Please enter your email and password");
+      await sleep(2000);
+      if (submitRef.current) {
+        submitRef.current.disabled = false;
+      }
+      return;
+    }
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (error) {
+      toastError(error.message);
+      await sleep(2000);
+      if (submitRef.current) {
+        submitRef.current.disabled = false;
+      }
+
+      return;
+    }
+
+    if (data) {
+      toastSuccess("Successfully logged in");
+      await sleep(2000);
+      window.location.href = "/dashboard";
+    }
   };
 
   return (
@@ -23,7 +54,7 @@ const LoginForm = () => {
           <p className="font-medium text-gray-600">Email address</p>
           <input
             type="email"
-            className="focus:outline-primary mt-3 h-10 rounded-lg border border-gray-300 px-2 text-gray-700 focus:invalid:outline-red-400"
+            className="mt-3 h-10 rounded-lg border border-gray-300 px-2 text-gray-700 focus:outline-primary focus:invalid:outline-red-400"
             required
             autoComplete="on"
             onChange={(event) => setEmail(event.target.value)}
@@ -33,14 +64,14 @@ const LoginForm = () => {
           <p className="font-medium text-gray-600">Password</p>
           <input
             type="password"
-            className="focus:outline-primary mt-3 h-10 rounded-lg border border-gray-300 px-2 text-gray-700"
+            className="mt-3 h-10 rounded-lg border border-gray-300 px-2 text-gray-700 focus:outline-primary"
             required
             onChange={(event) => setPassword(event.target.value)}
           />
         </div>
         <div className="mt-8 h-12 w-full">
           <button
-            className="bg-primary hover:bg-primary-600 flex h-full w-full items-center justify-center rounded-lg font-semibold text-white transition-colors delay-100 ease-in disabled:cursor-not-allowed disabled:bg-opacity-50"
+            className="flex h-full w-full items-center justify-center rounded-lg bg-primary font-semibold text-white transition-colors delay-100 ease-in hover:bg-primary-600 disabled:cursor-not-allowed disabled:bg-opacity-50"
             onClick={(e) => login(e)}
             ref={submitRef}
           >
