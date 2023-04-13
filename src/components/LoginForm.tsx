@@ -27,22 +27,22 @@ const LoginForm = () => {
 
   return (
     <>
-      <div className="min-w-[360px] rounded-2xl border border-gray-200 bg-white px-8 py-16 shadow-sm sm:min-w-[440px] sm:px-12 xl:min-w-[480px]">
+      <div className="min-w-[360px] rounded-2xl border border-slate-800 bg-slate-800 px-8 py-16 shadow-sm sm:min-w-[440px] sm:px-12 xl:min-w-[480px]">
         <div className="flex flex-col">
-          <p className="font-medium text-gray-600">Email address</p>
+          <p className="font-medium text-gray-300">Email address</p>
           <input
             type="email"
-            className="mt-3 h-10 rounded-lg border border-gray-300 px-2 text-gray-700 focus:outline-primary focus:invalid:outline-red-400"
+            className="mt-3 h-10 rounded-lg border border-slate-700 bg-slate-700 px-2 text-gray-300 focus:outline-primary focus:invalid:outline-red-400"
             required
             autoComplete="on"
             onChange={(event) => setEmail(event.target.value)}
           />
         </div>
         <div className="mt-8 flex flex-col">
-          <p className="font-medium text-gray-600">Password</p>
+          <p className="font-medium text-gray-300">Password</p>
           <input
             type="password"
-            className="mt-3 h-10 rounded-lg border border-gray-300 px-2 text-gray-700 focus:outline-primary"
+            className="mt-3 h-10 rounded-lg border border-slate-700 bg-slate-700 px-2 text-gray-300 focus:outline-primary"
             required
             onChange={(event) => setPassword(event.target.value)}
           />
