@@ -5,7 +5,7 @@ interface DashboardProps {}
 
 function Dashboard(props: DashboardProps) {
   async function logout() {
-    //
+    //w
   }
 
   const { data: session } = useSession();
