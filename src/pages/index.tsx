@@ -1,8 +1,19 @@
 import { type NextPage } from "next";
 import Head from "next/head";
+import { useEffect } from "react";
 import StatCard from "../components/StatCard";
 
 const Home: NextPage = () => {
+  useEffect(() => {
+    const getStat = async () => {
+      const res = await fetch("/api/v3/stats?type=browsetime");
+      const data = await res.json();
+      console.log(data);
+    };
+
+    getStat();
+  }, []);
+
   return (
     <>
       <Head>
