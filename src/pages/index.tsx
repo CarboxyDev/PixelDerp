@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Card from "../components/Card";
+import StatCard from "../components/StatCard";
 
 const Home: NextPage = () => {
   return (
@@ -10,7 +10,11 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex flex-col items-center">
         <div className="mt-60">
-          <Card />
+          <StatCard
+            statFigure="23"
+            statUnit="Hours"
+            content="The time you spent on this site, watching videos of cute fluffy cats"
+          />
         </div>
       </main>
     </>
