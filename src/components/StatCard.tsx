@@ -14,7 +14,7 @@ const StatCard = (props: StatCardProps) => {
             <h3 className="inline text-6xl font-semibold text-white">
               {statFigure}
             </h3>
-            <span className="ml-2 text-sm text-slate-500">{statUnit}</span>
+            <span className="ml-2 text-slate-500">{statUnit}</span>
           </div>
           <div className="mt-8">
             <p className="text-slate-400">{remark}</p>

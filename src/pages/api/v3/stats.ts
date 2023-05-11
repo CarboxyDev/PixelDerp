@@ -25,6 +25,28 @@ export default async function handler(
     };
   }
 
+  if (query.type == "moneyspent") {
+    statData = {
+      type: "moneyspent",
+      stat: {
+        figure: randint(20, 120).toString(),
+        unit: "dollars",
+        remark: "The amount of money you spent on cat merchandise",
+      },
+    };
+  }
+
+  if (query.type == "visits") {
+    statData = {
+      type: "visits",
+      stat: {
+        figure: randint(100, 500).toString(),
+        unit: "visits",
+        remark: "The number of times you visited this site",
+      },
+    };
+  }
+
   if (statData) {
     console.log("[+] Send stat " + query.type);
     res

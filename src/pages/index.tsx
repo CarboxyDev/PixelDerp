@@ -33,11 +33,23 @@ const Home: NextPage = () => {
       <main className="flex flex-col items-center">
         <div className="mt-60">
           {stat && (
-            <StatCard
-              statFigure={stat.figure}
-              statUnit={stat.unit}
-              remark={stat.remark}
-            />
+            <div className="grid grid-cols-3 gap-x-12">
+              <StatCard
+                statFigure={stat.figure}
+                statUnit={stat.unit}
+                remark={stat.remark}
+              />
+              <StatCard
+                statFigure="20"
+                statUnit="dollars"
+                remark="This is the amount you spent on cat merchandise."
+              />
+              <StatCard
+                statFigure="310"
+                statUnit="visits"
+                remark="The number of times you visited this website."
+              />
+            </div>
           )}
         </div>
       </main>
