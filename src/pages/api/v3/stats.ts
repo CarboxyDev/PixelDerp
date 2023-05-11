@@ -17,8 +17,10 @@ export default async function handler(
     statData = {
       type: "browse-time",
       stat: {
-        time: randint(10, 40).toString(),
+        figure: randint(10, 40).toString(),
         unit: "hours",
+        remark:
+          "The time you spent on this site, watching videos of cute fluffy cats",
       },
     };
   }

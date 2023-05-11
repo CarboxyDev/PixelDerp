@@ -1,11 +1,11 @@
 type StatCardProps = {
   statFigure: string;
   statUnit: string;
-  content: string;
+  remark: string;
 };
 
 const StatCard = (props: StatCardProps) => {
-  const { statFigure, statUnit, content } = props;
+  const { statFigure, statUnit, remark } = props;
   return (
     <>
       <div className="w-84 rounded-2xl border border-slate-700">
@@ -17,7 +17,7 @@ const StatCard = (props: StatCardProps) => {
             <span className="ml-2 text-sm text-slate-500">{statUnit}</span>
           </div>
           <div className="mt-8">
-            <p className="text-slate-400">{content}</p>
+            <p className="text-slate-400">{remark}</p>
           </div>
         </div>
       </div>

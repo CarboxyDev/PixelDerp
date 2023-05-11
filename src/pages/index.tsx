@@ -1,14 +1,25 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import StatCard from "../components/StatCard";
 
+type StatType = {
+  figure: string;
+  unit: string;
+  remark: string;
+} | null;
+
 const Home: NextPage = () => {
+  const [stat, setStat] = useState<StatType>(null);
+
   useEffect(() => {
     const getStat = async () => {
       const res = await fetch("/api/v3/stats?type=browsetime");
-      const data = await res.json();
-      console.log(data);
+      const responseData = await res.json();
+      console.log(responseData);
+      if (responseData.data) {
+        setStat(responseData.data.stat);
+      }
     };
 
     getStat();
@@ -21,11 +32,13 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex flex-col items-center">
         <div className="mt-60">
-          <StatCard
-            statFigure="23"
-            statUnit="Hours"
-            content="The time you spent on this site, watching videos of cute fluffy cats"
-          />
+          {stat && (
+            <StatCard
+              statFigure={stat.figure}
+              statUnit={stat.unit}
+              remark={stat.remark}
+            />
+          )}
         </div>
       </main>
     </>
