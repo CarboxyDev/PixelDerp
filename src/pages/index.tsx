@@ -13,7 +13,13 @@ const Home: NextPage = () => {
   const [stats, setStats] = useState<StatType[]>([]);
 
   useEffect(() => {
-    const statNames = ["browsetime", "moneyspent", "visits", "friends"];
+    const statNames = [
+      "browsetime",
+      "moneyspent",
+      "visits",
+      "friends",
+      "logincount",
+    ];
     // uses waterfall fetching - bad performance
     const compiledStats: StatType[] = [];
     const getStat = async () => {
@@ -22,7 +28,7 @@ const Home: NextPage = () => {
         const responseData = await res.json();
         console.log(responseData);
         if (responseData.data) {
-          compiledStats.push(responseData.data.stat);
+          compiledStats.push(responseData.data);
         }
       }
       setStats(compiledStats);

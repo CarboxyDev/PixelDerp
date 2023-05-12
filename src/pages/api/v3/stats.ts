@@ -11,55 +11,51 @@ export default async function handler(
     return;
   }
 
-  let statData;
-
-  if (query.type == "browsetime") {
-    statData = {
-      type: "browse-time",
-      stat: {
-        figure: randint(10, 40).toString(),
-        unit: "hours",
-        remark:
-          "The time you spent on this site, watching videos of cute fluffy cats",
-      },
-    };
-  }
-
-  if (query.type == "moneyspent") {
-    statData = {
+  const statTypes = [
+    {
+      type: "browsetime",
+      figure: randint(10, 40),
+      unit: "hours",
+      remark:
+        "The time you spent on this site, watching videos of cute fluffy cats",
+    },
+    {
       type: "moneyspent",
-      stat: {
-        figure: randint(20, 120).toString(),
-        unit: "dollars",
-        remark: "The amount of money you spent on cat merchandise",
-      },
-    };
-  }
-
-  if (query.type == "visits") {
-    statData = {
+      figure: randint(20, 120),
+      unit: "dollars",
+      remark: "The amount of money you spent on cat merchandise",
+    },
+    {
       type: "visits",
-      stat: {
-        figure: randint(100, 500).toString(),
-        unit: "visits",
-        remark: "The number of times you visited this site",
-      },
-    };
-  }
-
-  if (query.type == "friends") {
-    statData = {
+      figure: randint(100, 500),
+      unit: "visits",
+      remark: "The number of times you visited this site",
+    },
+    {
       type: "friends",
-      stat: {
-        figure: randint(4, 22).toString(),
-        unit: "friends",
-        remark:
-          "The number of people that decided you were good enough to be friends with",
-      },
-    };
-  }
+      figure: randint(4, 22),
+      unit: "friends",
+      remark:
+        "The number of people that decided you were good enough to be friends with",
+    },
+    {
+      type: "logincount",
+      figure: randint(2, 15),
+      unit: "logins",
+      remark:
+        "The number of times you, in all your intellect, decided to login to this site",
+    },
+  ];
 
-  if (statData) {
+  const queryType = statTypes.find((stat) => stat.type == query.type);
+
+  if (queryType) {
+    const statData = {
+      type: queryType.type,
+      figure: queryType.figure.toString(),
+      unit: queryType.unit,
+      remark: queryType.remark,
+    };
     console.log("[+] Send stat " + query.type);
     res
       .status(200)
