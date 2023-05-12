@@ -7,10 +7,10 @@ type StatType = {
   figure: string;
   unit: string;
   remark: string;
-} | null;
+};
 
 const Home: NextPage = () => {
-  const [stat, setStat] = useState<StatType>(null);
+  const [stats, setStats] = useState<StatType[]>([]);
 
   useEffect(() => {
     const getStat = async () => {
@@ -18,7 +18,7 @@ const Home: NextPage = () => {
       const responseData = await res.json();
       console.log(responseData);
       if (responseData.data) {
-        setStat(responseData.data.stat);
+        setStats([...stats, responseData.data.stat]);
       }
     };
 
@@ -32,23 +32,16 @@ const Home: NextPage = () => {
       </Head>
       <main className="flex flex-col items-center">
         <div className="mt-60">
-          {stat && (
+          {stats.length > 0 && (
             <div className="grid grid-cols-3 gap-x-12">
-              <StatCard
-                statFigure={stat.figure}
-                statUnit={stat.unit}
-                remark={stat.remark}
-              />
-              <StatCard
-                statFigure="20"
-                statUnit="dollars"
-                remark="This is the amount you spent on cat merchandise."
-              />
-              <StatCard
-                statFigure="310"
-                statUnit="visits"
-                remark="The number of times you visited this website."
-              />
+              {stats.map((stat: StatType, index) => (
+                <StatCard
+                  key={index}
+                  statFigure={stat.figure}
+                  statUnit={stat.unit}
+                  remark={stat.remark}
+                />
+              ))}
             </div>
           )}
         </div>
