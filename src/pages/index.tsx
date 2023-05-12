@@ -13,11 +13,11 @@ const Home: NextPage = () => {
   const [stats, setStats] = useState<StatType[]>([]);
 
   useEffect(() => {
-    const statNames = ["browsetime", "moneyspent", "visits"];
+    const statNames = ["browsetime", "moneyspent", "visits", "friends"];
     // uses waterfall fetching - bad performance
     const compiledStats: StatType[] = [];
     const getStat = async () => {
-      for (let i = 0; i < 3; i++) {
+      for (let i = 0; i < statNames.length; i++) {
         const res = await fetch("/api/v3/stats?type=" + statNames[i]);
         const responseData = await res.json();
         console.log(responseData);
@@ -36,10 +36,10 @@ const Home: NextPage = () => {
       <Head>
         <title>PixelDerp</title>
       </Head>
-      <main className="flex flex-col items-center">
-        <div className="mt-60">
+      <main className="mx-20 flex flex-col items-center">
+        <div className="mt-32">
           {stats.length > 0 && (
-            <div className="grid grid-cols-3 gap-x-12">
+            <div className="grid grid-cols-3 gap-x-12 gap-y-12">
               {stats.map((stat: StatType, index) => (
                 <StatCard
                   key={index}

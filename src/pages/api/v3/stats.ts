@@ -47,6 +47,18 @@ export default async function handler(
     };
   }
 
+  if (query.type == "friends") {
+    statData = {
+      type: "friends",
+      stat: {
+        figure: randint(4, 22).toString(),
+        unit: "friends",
+        remark:
+          "The number of people that decided you were good enough to be friends with",
+      },
+    };
+  }
+
   if (statData) {
     console.log("[+] Send stat " + query.type);
     res
