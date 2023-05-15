@@ -1,5 +1,5 @@
 import { Html, Head, Main, NextScript } from "next/document";
-import { clsx } from "clsx";
+import { cn } from "../utils/util";
 
 const Document = () => {
   return (
@@ -13,7 +13,7 @@ const Document = () => {
         <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
       </Head>
       <body
-        className={clsx(
+        className={cn(
           "bg-gray-900 font-inter text-white",
           process.env.DEV == "true" && "debug-screens"
         )}
